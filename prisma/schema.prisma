@@ -1,0 +1,94 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Producto {
+  id             Int             @id
+  nombre         String          @db.VarChar(50)
+  precio         Float
+  unidadMedida   String          @map("unidad_medida") @db.VarChar(50)
+  stock          Int
+  imagen         String          @db.Text
+  detallePedidos DetallePedido[]
+
+  @@map("productos")
+}
+
+model Usuario {
+  id          Int         @id
+  nombre      String      @db.Text
+  dni         String      @db.VarChar(8)
+  correo      String      @db.Text
+  password    String      @db.Text
+  telefono    String      @db.Text
+  direcciones Direccion[]
+  pedidos     Pedido[]
+
+  @@map("usuarios")
+}
+
+model Direccion {
+  id         Int     @id
+  calle      String  @db.Text
+  numero     String  @db.Text
+  dpt        String  @db.Text
+  ciudad     String  @db.Text
+  provincia  String  @db.Text
+  referencia String? @db.Text // asi se indica que una columna puede contener valores nulo
+  usuarioId  Int     @map("usuario_id")
+  usuario    Usuario @relation(fields: [usuarioId], references: [id])
+
+  @@map("direcciones")
+}
+
+model Pedido {
+  id                Int             @id
+  montoTotal        Float           @map("monto_total")
+  numeroSeguimiento String?         @map("numero_seguimiento")
+  estado            PedidoEstado
+  fecha             DateTime
+  direccionId       Int             @map("direccion_id")
+  usuarioId         Int             @map("usuario_id")
+  usuario           Usuario         @relation(fields: [usuarioId], references: [id])
+  detallePedidos    DetallePedido[]
+  pedidoEventos     PedidoEvento[]
+
+  @@map("pedidos")
+}
+
+model DetallePedido {
+  id         Int      @id
+  precio     Float
+  cantidad   Int
+  productoId Int      @map("producto_id")
+  producto   Producto @relation(fields: [productoId], references: [id])
+  pedidoId   Int      @map("pedido_id")
+  pedido     Pedido   @relation(fields: [pedidoId], references: [id])
+
+  @@map("detalle_pedidos")
+}
+
+model PedidoEvento {
+  id       Int          @id
+  titulo   PedidoEstado
+  fecha    DateTime
+  pedidoId Int          @map("pedido_id")
+  pedido   Pedido       @relation(fields: [pedidoId], references: [id])
+
+  @@map("pedido_eventos")
+}
+
+enum PedidoEstado {
+  PAGADO
+  CANCELADO
+  ENVIADO
+  RECIBIDO
+}
