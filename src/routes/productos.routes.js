@@ -1,6 +1,10 @@
 import { Router } from "express";
-import { subirImagen } from "../controllers/productos.controller.js";
+import {
+  crearProducto,
+  subirImagen,
+} from "../controllers/productos.controller.js";
 import Multer from "multer";
+import { nanoid } from "nanoid";
 
 // Sirve para indicar el formato en el cual se va a tratar el archivo
 // diskStorage > indicar que el archivo se almacenara en el disco (de manera permanente)
@@ -12,7 +16,9 @@ const almacenamiento = Multer.diskStorage({
     const { mimetype } = archivo;
     // si queremos solamente subir imagenes jpg o pdf's
     if (mimetype == "image/jpeg" || mimetype == "application/pdf") {
-      cb(null, archivo.originalname);
+      const id = nanoid(5);
+      const nombre = id + "-" + archivo.originalname;
+      cb(null, nombre);
     } else {
       cb(new Error("Tipo de archivo no compatible"));
     }
@@ -39,3 +45,5 @@ productoRouter.post(
   multerMiddleware.single("imagen"),
   subirImagen
 );
+
+productoRouter.post("/producto", crearProducto);
