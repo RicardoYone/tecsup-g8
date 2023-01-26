@@ -1,5 +1,6 @@
 // el seed sirve para alimentar nuestra bd con determinada informacion que nunca va a cambiar, tbn se utiliza para crear data de prueba
 import prisma from "@prisma/client";
+
 const { PrismaClient } = prisma;
 const conexion = new PrismaClient();
 

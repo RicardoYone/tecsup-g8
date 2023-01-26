@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "nodemon src/index.js",
     "alimentar:bd": "prisma db seed",
-    "crear:migracion":"prisma migrate dev",
+    "crear:migracion": "prisma migrate dev",
     "crear:solo:migracion": "prisma migrate dev --create-only",
     "ejecutar:migraciones": "prisma migrate deploy",
     "resetar:bd": "prisma migrate reset",
@@ -33,7 +33,7 @@
     "@prisma/client": "^4.4.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.2",
-    "express": "^4.18.1",
+    "express": "^4.18.2",
     "node-fetch": "^3.2.10"
   },
   "devDependencies": {
