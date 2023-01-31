@@ -139,6 +139,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Sirve para indicar a Django cual sera el modelo que tiene que utilizara para la tabla 'auth_user'
 AUTH_USER_MODEL = 'gestion.Usuario'
 
+#------------------------------------------------------------------------
+
 # OUTLOOK > smtp.outlook.com
 # YAHOO > smtp.yahoo.com
 # HOTMAIL > smtp.hotmail.com

@@ -1,6 +1,7 @@
 from rest_framework.permissions import BasePermission
 from rest_framework.request import Request
 
+
 class PermisoPersonalizado(BasePermission):
     # message > Sera el mensaje que se mostrara en el caso no se cumpla con las condiciones indicadas
     message = 'No hay permisos'
@@ -13,7 +14,7 @@ class PermisoPersonalizado(BasePermission):
         # request > la instancia de la peticion que me realiza el cliente
         # request.user > nos devuelve la instancia del usuario encontrado en la base de datos. En el caso no se proveyese las credenciales de auth el objeto request.user sera un usuario anonimo (AnonymousUser) por lo que no podremos acceder a los atributos de la clase usuario
         print(request.user)
-        # request.auth > Si no se le dan las credenciales de auth entonces sera None, si si le dan entonces nos imprimira la token que nos envia el usuario 
+        # request.auth > Si no se le dan las credenciales de auth entonces sera None, si si le dan entonces nos imprimira la token que nos envia el usuario
         print(request.auth)
         # Generalmente se suele utilizar la propiedad user ya que contiene mejor informacion que la propiedad auth
 
@@ -21,7 +22,7 @@ class PermisoPersonalizado(BasePermission):
         # print(view)
         # Solamente para los usuarios que no son administradores
 
-        if request.auth is None : 
+        if request.auth is None:
             return False
 
         print(request.user.rol)

@@ -2,6 +2,7 @@ from django.contrib.auth.models import BaseUserManager
 # BaseUserManager > me permite modificar el comportamiento ENTERO de la creacion del usuario por la terminal
 # UserManager > me permitir modificar el comportamiento de los campos nuevos que estoy agregando al modelo del usuario mas no a todos los campos
 
+
 class AuthManager(BaseUserManager):
     def create_superuser(self, correo, password, nombre, apellido, rol):
         """Creacion de un super usuario por consola (python manage.py createsuperuser)"""
@@ -12,7 +13,8 @@ class AuthManager(BaseUserManager):
         correo_normalizado = self.normalize_email(correo)
 
         # inicializo el nuevo usuario con la informacion brindada por la terminal
-        nuevoUsuario = self.model(correo=correo_normalizado, nombre=nombre, apellido=apellido, rol=rol, is_staff=True, is_superuser=True)
+        nuevoUsuario = self.model(correo=correo_normalizado, nombre=nombre,
+                                  apellido=apellido, rol=rol, is_staff=True, is_superuser=True)
 
         # generara un hash de la contraseña para evitar guardar el valor de manera pura en la bd, NOTA: los hashes no pueden ser convertidos al valor original lo que lo hace mas seguro
         nuevoUsuario.set_password(password)
