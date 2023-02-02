@@ -30,7 +30,8 @@ SECRET_KEY = 'django-insecure--0pfn-ihjz+kna2hjf-gc@q#0e1ze$8a&vl2kwsgqtd&^8h8o0
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['album-mundial-eduardo.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['album-mundial-eduardo.herokuapp.com',
+                 '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -139,12 +140,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Sirve para indicar a Django cual sera el modelo que tiene que utilizara para la tabla 'auth_user'
 AUTH_USER_MODEL = 'gestion.Usuario'
 
-#------------------------------------------------------------------------
+# ------------------------------------------------------------------------
 
 # OUTLOOK > smtp.outlook.com
 # YAHOO > smtp.yahoo.com
 # HOTMAIL > smtp.hotmail.com
-EMAIL_HOST = 'smtp.gmail.com' 
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = environ.get('EMAIL_USERNAME')
 EMAIL_HOST_PASSWORD = environ.get('EMAIL_PASSWORD')
 # En el caso de usar un correo corporativo consultar con el administrador sobre los valores de estas variables:
