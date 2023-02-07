@@ -12,11 +12,13 @@ export const crearVotante = async (req, res) => {
       },
       method: "GET",
     });
-    const informacion = await respuesta.json();
 
+    const informacion = await respuesta.json();
     console.log(informacion);
+
     if (informacion.success) {
       const { data } = informacion;
+
       const votanteCreado = await conexion.votante.create({
         data: {
           apellido: data.apellido_paterno + " " + data.apellido_materno,
