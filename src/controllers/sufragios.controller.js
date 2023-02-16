@@ -2,6 +2,7 @@ import conexion from "../prisma.js";
 
 export const crearSufragio = async (req, res) => {
   const { candidatoId, votanteId } = req.body;
+
   try {
     // Buscar si el candidatoId existe
     await conexion.candidato.findUniqueOrThrow({ where: { id: candidatoId } });
